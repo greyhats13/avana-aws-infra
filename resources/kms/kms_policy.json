@@ -1,0 +1,111 @@
+{
+  "Id": "key-consolepolicy-3",
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Sid": "Enable IAM User Permissions",
+          "Effect": "Allow",
+          "Principal": {
+              "AWS": "arn:aws:iam::299367571843:root"
+          },
+          "Action": "kms:*",
+          "Resource": "*"
+      },
+      {
+          "Sid": "Allow access for Key Administrators",
+          "Effect": "Allow",
+          "Principal": {
+              "AWS": [
+                  "arn:aws:iam::299367571843:role/adminRole",
+                  "arn:aws:iam::299367571843:user/greyhats13"
+              ]
+          },
+          "Action": [
+              "kms:Create*",
+              "kms:Describe*",
+              "kms:Enable*",
+              "kms:List*",
+              "kms:Put*",
+              "kms:Update*",
+              "kms:Revoke*",
+              "kms:Disable*",
+              "kms:Get*",
+              "kms:Delete*",
+              "kms:TagResource",
+              "kms:UntagResource",
+              "kms:ScheduleKeyDeletion",
+              "kms:CancelKeyDeletion"
+          ],
+          "Resource": "*"
+      },
+      {
+          "Sid": "Allow use of the key",
+          "Effect": "Allow",
+          "Principal": {
+              "AWS": [
+                  "arn:aws:iam::299367571843:role/aws-service-role/organizations.amazonaws.com/AWSServiceRoleForOrganizations",
+                  "arn:aws:iam::299367571843:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS",
+                  "arn:aws:iam::299367571843:role/aws-service-role/support.amazonaws.com/AWSServiceRoleForSupport",
+                  "arn:aws:iam::299367571843:role/aws-service-role/trustedadvisor.amazonaws.com/AWSServiceRoleForTrustedAdvisor",
+                  "arn:aws:iam::299367571843:role/cloud9-blastlambda-blastlambdaRole-1AO9G7T2DDAUE",
+                  "arn:aws:iam::299367571843:role/LambdaCreateCloudWatchLog",
+                  "arn:aws:iam::299367571843:role/S3CopyLambda",
+                  "arn:aws:iam::299367571843:user/greyhats13",
+                  "arn:aws:iam::299367571843:role/adminRole",
+                  "arn:aws:iam::299367571843:role/aws-elasticbeanstalk-ec2-role",
+                  "arn:aws:iam::299367571843:role/aws-elasticbeanstalk-service-role",
+                  "arn:aws:iam::299367571843:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS",
+                  "arn:aws:iam::299367571843:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
+                  "arn:aws:iam::299367571843:role/aws-service-role/cloud9.amazonaws.com/AWSServiceRoleForAWSCloud9",
+                  "arn:aws:iam::299367571843:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+                  "arn:aws:iam::299367571843:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing",
+                  "arn:aws:iam::299367571843:role/aws-service-role/globalaccelerator.amazonaws.com/AWSServiceRoleForGlobalAccelerator"
+              ]
+          },
+          "Action": [
+              "kms:Encrypt",
+              "kms:Decrypt",
+              "kms:ReEncrypt*",
+              "kms:GenerateDataKey*",
+              "kms:DescribeKey"
+          ],
+          "Resource": "*"
+      },
+      {
+          "Sid": "Allow attachment of persistent resources",
+          "Effect": "Allow",
+          "Principal": {
+              "AWS": [
+                  "arn:aws:iam::299367571843:role/aws-service-role/organizations.amazonaws.com/AWSServiceRoleForOrganizations",
+                  "arn:aws:iam::299367571843:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS",
+                  "arn:aws:iam::299367571843:role/aws-service-role/support.amazonaws.com/AWSServiceRoleForSupport",
+                  "arn:aws:iam::299367571843:role/aws-service-role/trustedadvisor.amazonaws.com/AWSServiceRoleForTrustedAdvisor",
+                  "arn:aws:iam::299367571843:role/cloud9-blastlambda-blastlambdaRole-1AO9G7T2DDAUE",
+                  "arn:aws:iam::299367571843:role/LambdaCreateCloudWatchLog",
+                  "arn:aws:iam::299367571843:role/S3CopyLambda",
+                  "arn:aws:iam::299367571843:user/greyhats13",
+                  "arn:aws:iam::299367571843:role/adminRole",
+                  "arn:aws:iam::299367571843:role/aws-elasticbeanstalk-ec2-role",
+                  "arn:aws:iam::299367571843:role/aws-elasticbeanstalk-service-role",
+                  "arn:aws:iam::299367571843:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS",
+                  "arn:aws:iam::299367571843:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
+                  "arn:aws:iam::299367571843:role/aws-service-role/cloud9.amazonaws.com/AWSServiceRoleForAWSCloud9",
+                  "arn:aws:iam::299367571843:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+                  "arn:aws:iam::299367571843:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing",
+                  "arn:aws:iam::299367571843:role/aws-service-role/globalaccelerator.amazonaws.com/AWSServiceRoleForGlobalAccelerator"
+              ]
+          },
+          "Action": [
+              "kms:CreateGrant",
+              "kms:ListGrants",
+              "kms:RevokeGrant"
+          ],
+          "Resource": "*",
+          "Condition": {
+              "Bool": {
+                  "kms:GrantIsForAWSResource": "true"
+              }
+          }
+      }
+  ]
+}
