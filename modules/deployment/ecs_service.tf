@@ -3,51 +3,6 @@ provider "aws" {
   profile = "${var.unit}-${var.env}"
 }
 
-data "terraform_remote_state" "network" {
-  backend = "s3"
-  config = {
-    bucket  = "${var.unit}-${var.env}-storage-s3-tfstate-tf"
-    key     = "${var.unit}-network-${var.env}.tfstate"
-    region  = var.region
-    profile = "${var.unit}-${var.env}"
-  }
-}
-
-data "terraform_remote_state" "ecs" {
-  backend = "s3"
-  config = {
-    bucket  = "${var.unit}-${var.env}-storage-s3-tfstate-tf"
-    key     = "${var.unit}-compute-ecs-${var.env}.tfstate"
-    region  = var.region
-    profile = "${var.unit}-${var.env}"
-  }
-}
-
-data "terraform_remote_state" "kms" {
-  backend = "s3"
-  config = {
-    bucket  = "${var.unit}-${var.env}-storage-s3-tfstate-tf"
-    key     = "${var.unit}-security-kms-${var.env}.tfstate"
-    region  = var.region
-    profile = "${var.unit}-${var.env}"
-  }
-}
-
-data "template_file" "container_definitions" {
-  template = file("${path.module}/container_definitions.json")
-  vars = {
-    unit               = var.unit
-    env                = var.env
-    code               = var.code
-    feature            = var.feature
-    image              = "kamerk22/laravel-alpine"
-    cpu                = var.cpu
-    memory             = var.memory
-    memory_reservation = var.memory_reservation
-    port               = var.container_port
-  }
-}
-
 resource "aws_ecs_task_definition" "task_definition" {
   container_definitions    = data.template_file.container_definitions.rendered
   cpu                      = 2 * var.cpu

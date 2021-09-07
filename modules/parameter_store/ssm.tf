@@ -14,7 +14,7 @@ data "terraform_remote_state" "kms" {
 }
 
 resource "aws_ssm_parameter" "ssm" {
-  for_each  = var.cloudflare
+  for_each  = var.list_of_ssm
   name      = "/${var.unit}/${var.env}/secret/${var.code}/${var.feature}/${each.key}"
   type      = "SecureString"
   value     = each.value

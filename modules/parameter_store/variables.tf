@@ -27,7 +27,7 @@ variable "overwrite" {
   description = "overwrite SSM value changes"
 }
 
-variable "cloudflare" {
+variable "list_of_ssm" {
   type = map(string)
-  description = "Cloudflare parameters"
+  description = "list of ssm parameters"
 }

@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket  = "avn-dev-storage-s3-tfstate-tf"
     region  = "ap-southeast-1"
-    key     = "avn-ssm-cloudflare-dev.tfstate"
+    key     = "avn-ssm-github-dev.tfstate"
     profile = "avn-dev"
   }
 }
@@ -17,7 +17,7 @@ module "ssm" {
   unit        = "avn"
   env         = "dev"
   code        = "ssm"
-  feature     = "cloudflare"
+  feature     = "github"
   creator     = "tf"
   overwrite   = true
   list_of_ssm = var.list_of_ssm

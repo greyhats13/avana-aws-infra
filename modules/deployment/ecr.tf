@@ -1,7 +1,3 @@
-data "template_file" "ecr_lifecycle_policy" {
-  template = file("${path.module}/ecr_lifecycle_policy.json")
-}
-
 ##### ECR
 resource "aws_ecr_repository" "ecr_php" {
   name        = "${var.unit}-${var.env}-${var.code}-${var.feature}-php"
