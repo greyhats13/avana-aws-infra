@@ -11,7 +11,7 @@ variable "cloudflare" {
   #secret value in tfvars, tfvars is in .gitignore
 }
 
-module "s3_bucket" {
+module "ssm" {
   source     = "../../../modules/parameter_store"
   region            = "ap-southeast-1"
   unit              = "avn"

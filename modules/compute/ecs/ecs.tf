@@ -15,11 +15,11 @@ data "terraform_remote_state" "avn_network" {
 
 resource "aws_ecs_cluster" "ecs_cluster" {
   name               = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}-cluster-${var.creator}"
-  capacity_providers = ["FARGATE_SPOT", "FARGATE"]
+  # capacity_providers = ["FARGATE_SPOT", "FARGATE"]
 
-  default_capacity_provider_strategy {
-    capacity_provider = "FARGATE_SPOT"
-  }
+  # default_capacity_provider_strategy {
+  #   capacity_provider = "FARGATE_SPOT"
+  # }
 
   setting {
     name  = "containerInsights"
