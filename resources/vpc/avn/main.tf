@@ -1,17 +1,26 @@
+terraform {
+  backend "s3" {
+    bucket  = "avn-dev-storage-s3-tfstate-tf"
+    region  = "ap-southeast-1"
+    key     = "avn-network-dev.tfstate"
+    profile = "avn-dev"
+  }
+}
+
 module "vpc" {
-  source                           = "../../../modules/network"
-  region                           = var.region
-  unit                             = var.unit
-  env                              = var.env
-  code                             = var.code
-  feature                          = var.feature
-  creator                          = var.creator
-  vpc_cidr                         = var.vpc_cidr
-  enable_dns_support               = var.enable_dns_support
-  enable_dns_hostnames             = var.enable_dns_hostnames
-  public_subnet_cidr               = var.public_subnet_cidr
-  app_subnet_cidr                  = var.app_subnet_cidr
-  cache_subnet_cidr                = var.cache_subnet_cidr
-  db_subnet_cidr                   = var.db_subnet_cidr
-  total_eip                        = 2 
+  source               = "../../../modules/network"
+  region               = "ap-southeast-1"
+  unit                 = "avn"
+  env                  = "dev"
+  code                 = "network"
+  feature              = ["vpc", "subnet", "igw", "eip", "nat", "route"]
+  creator              = "tf"
+  vpc_cidr             = "10.0.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+  public_subnet_cidr   = ["10.0.0.0/24", "10.0.1.0/24"]
+  app_subnet_cidr      = ["10.0.2.0/24", "10.0.3.0/24"]
+  cache_subnet_cidr    = ["10.0.4.0/24", "10.0.5.0/24"]
+  db_subnet_cidr       = ["10.0.6.0/24", "10.0.7.0/24"]
+  total_eip            = 2
 }

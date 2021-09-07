@@ -3,7 +3,7 @@ resource "aws_eip" "eip" {
   vpc   = true
 
   tags = {
-    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[3]}-${var.creator}"
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[3]}-${var.creator}-${count.index}"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = var.feature[3]

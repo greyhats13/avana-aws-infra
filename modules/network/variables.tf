@@ -1,6 +1,7 @@
 #Naming Standard
 variable "region" {
-  default = "ap-southeast-1"
+  type        = string
+  description = "AWS region"
 }
 
 variable "unit" {
