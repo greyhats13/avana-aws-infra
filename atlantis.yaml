@@ -5,3 +5,41 @@ projects:
     autoplan:
       when_modified: ["*.tf*"]
       enabled: true
+  - dir: service_deployment/core-oauth
+    apply_requirements: []
+    autoplan:
+      when_modified: ["*.tf*"]
+      enabled: true
+  - dir: cloud_deployment/bastion
+    apply_requirements: []
+    autoplan:
+      when_modified: ["*.tf*"]
+      enabled: true
+  - dir: cloud_deployment/ecs
+    apply_requirements: []
+    autoplan:
+      when_modified: ["*.tf*"]
+  - dir: cloud_deployment/ecs
+    apply_requirements: []
+    autoplan:
+      when_modified: ["*.tf*"]
+  - dir: cloud_deployment/elasticache
+    apply_requirements: []
+    autoplan:
+      when_modified: ["*.tf*"]
+  - dir: cloud_deployment/kms
+    apply_requirements: []
+    autoplan:
+      when_modified: ["*.tf*"]
+  - dir: cloud_deployment/rds
+    apply_requirements: []
+    autoplan:
+      when_modified: ["*.tf*"]
+  - dir: cloud_deployment/ssm
+    apply_requirements: []
+    autoplan:
+      when_modified: ["*.tf*"]
+  - dir: cloud_deployment/vpc
+    apply_requirements: []
+    autoplan:
+      when_modified: ["*.tf*"]
