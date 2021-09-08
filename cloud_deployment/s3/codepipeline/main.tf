@@ -1,17 +1,17 @@
 terraform {
   backend "s3" {
-    bucket  = "avn-dev-storage-s3-tfstate"
-    region  = "us-east-1"
-    key     = "avn-storage-s3-codepipeline-dev.tfstate"
+    bucket  = "avn-dev-storage-s3-terraform"
+    region  = "ap-southeast-2"
+    key     = "avn-storage-s3-pipeline-dev.tfstate"
     profile = "avn-dev"
   }
 }
 
 module "s3_bucket" {
   source  = "../../../modules/storage"
-  region  = "us-east-1"
+  region  = "ap-southeast-2"
   unit    = "avn"
   env     = "dev"
   code    = "storage"
-  feature = "s3-codepipeline"
+  feature = "s3-pipeline"
 }

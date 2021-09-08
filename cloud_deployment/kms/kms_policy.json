@@ -1,111 +1,183 @@
 {
-  "Id": "key-consolepolicy-3",
-  "Version": "2012-10-17",
-  "Statement": [
-      {
-          "Sid": "Enable IAM User Permissions",
-          "Effect": "Allow",
-          "Principal": {
-              "AWS": "arn:aws:iam::299367571843:root"
-          },
-          "Action": "kms:*",
-          "Resource": "*"
-      },
-      {
-          "Sid": "Allow access for Key Administrators",
-          "Effect": "Allow",
-          "Principal": {
-              "AWS": [
-                  "arn:aws:iam::299367571843:role/adminRole",
-                  "arn:aws:iam::299367571843:user/greyhats13"
-              ]
-          },
-          "Action": [
-              "kms:Create*",
-              "kms:Describe*",
-              "kms:Enable*",
-              "kms:List*",
-              "kms:Put*",
-              "kms:Update*",
-              "kms:Revoke*",
-              "kms:Disable*",
-              "kms:Get*",
-              "kms:Delete*",
-              "kms:TagResource",
-              "kms:UntagResource",
-              "kms:ScheduleKeyDeletion",
-              "kms:CancelKeyDeletion"
-          ],
-          "Resource": "*"
-      },
-      {
-          "Sid": "Allow use of the key",
-          "Effect": "Allow",
-          "Principal": {
-              "AWS": [
-                  "arn:aws:iam::299367571843:role/aws-service-role/organizations.amazonaws.com/AWSServiceRoleForOrganizations",
-                  "arn:aws:iam::299367571843:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS",
-                  "arn:aws:iam::299367571843:role/aws-service-role/support.amazonaws.com/AWSServiceRoleForSupport",
-                  "arn:aws:iam::299367571843:role/aws-service-role/trustedadvisor.amazonaws.com/AWSServiceRoleForTrustedAdvisor",
-                  "arn:aws:iam::299367571843:role/cloud9-blastlambda-blastlambdaRole-1AO9G7T2DDAUE",
-                  "arn:aws:iam::299367571843:role/LambdaCreateCloudWatchLog",
-                  "arn:aws:iam::299367571843:role/S3CopyLambda",
-                  "arn:aws:iam::299367571843:user/greyhats13",
-                  "arn:aws:iam::299367571843:role/adminRole",
-                  "arn:aws:iam::299367571843:role/aws-elasticbeanstalk-ec2-role",
-                  "arn:aws:iam::299367571843:role/aws-elasticbeanstalk-service-role",
-                  "arn:aws:iam::299367571843:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS",
-                  "arn:aws:iam::299367571843:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
-                  "arn:aws:iam::299367571843:role/aws-service-role/cloud9.amazonaws.com/AWSServiceRoleForAWSCloud9",
-                  "arn:aws:iam::299367571843:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
-                  "arn:aws:iam::299367571843:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing",
-                  "arn:aws:iam::299367571843:role/aws-service-role/globalaccelerator.amazonaws.com/AWSServiceRoleForGlobalAccelerator"
-              ]
-          },
-          "Action": [
-              "kms:Encrypt",
-              "kms:Decrypt",
-              "kms:ReEncrypt*",
-              "kms:GenerateDataKey*",
-              "kms:DescribeKey"
-          ],
-          "Resource": "*"
-      },
-      {
-          "Sid": "Allow attachment of persistent resources",
-          "Effect": "Allow",
-          "Principal": {
-              "AWS": [
-                  "arn:aws:iam::299367571843:role/aws-service-role/organizations.amazonaws.com/AWSServiceRoleForOrganizations",
-                  "arn:aws:iam::299367571843:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS",
-                  "arn:aws:iam::299367571843:role/aws-service-role/support.amazonaws.com/AWSServiceRoleForSupport",
-                  "arn:aws:iam::299367571843:role/aws-service-role/trustedadvisor.amazonaws.com/AWSServiceRoleForTrustedAdvisor",
-                  "arn:aws:iam::299367571843:role/cloud9-blastlambda-blastlambdaRole-1AO9G7T2DDAUE",
-                  "arn:aws:iam::299367571843:role/LambdaCreateCloudWatchLog",
-                  "arn:aws:iam::299367571843:role/S3CopyLambda",
-                  "arn:aws:iam::299367571843:user/greyhats13",
-                  "arn:aws:iam::299367571843:role/adminRole",
-                  "arn:aws:iam::299367571843:role/aws-elasticbeanstalk-ec2-role",
-                  "arn:aws:iam::299367571843:role/aws-elasticbeanstalk-service-role",
-                  "arn:aws:iam::299367571843:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS",
-                  "arn:aws:iam::299367571843:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
-                  "arn:aws:iam::299367571843:role/aws-service-role/cloud9.amazonaws.com/AWSServiceRoleForAWSCloud9",
-                  "arn:aws:iam::299367571843:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
-                  "arn:aws:iam::299367571843:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing",
-                  "arn:aws:iam::299367571843:role/aws-service-role/globalaccelerator.amazonaws.com/AWSServiceRoleForGlobalAccelerator"
-              ]
-          },
-          "Action": [
-              "kms:CreateGrant",
-              "kms:ListGrants",
-              "kms:RevokeGrant"
-          ],
-          "Resource": "*",
-          "Condition": {
-              "Bool": {
-                  "kms:GrantIsForAWSResource": "true"
-              }
-          }
-      }
-  ]
+    "Id": "key-consolepolicy-3",
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Enable IAM User Permissions",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::714071859213:root"
+            },
+            "Action": "kms:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "Allow access for Key Administrators",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::714071859213:role/service-role/codebuild-mirza-service-role",
+                    "arn:aws:iam::714071859213:role/ecsAutoscaleRole",
+                    "arn:aws:iam::714071859213:role/ecsInstanceRole",
+                    "arn:aws:iam::714071859213:role/ecsTaskExecutionRole",
+                    "arn:aws:iam::714071859213:role/LambdaExtremeAccess",
+                    "arn:aws:iam::714071859213:role/OrganizationAccountAccessRole",
+                    "arn:aws:iam::714071859213:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+                    "arn:aws:iam::714071859213:role/aws-service-role/elasticache.amazonaws.com/AWSServiceRoleForElastiCache",
+                    "arn:aws:iam::714071859213:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing",
+                    "arn:aws:iam::714071859213:role/aws-service-role/globalaccelerator.amazonaws.com/AWSServiceRoleForGlobalAccelerator",
+                    "arn:aws:iam::714071859213:role/aws-service-role/replicator.lambda.amazonaws.com/AWSServiceRoleForLambdaReplicator",
+                    "arn:aws:iam::714071859213:role/aws-service-role/organizations.amazonaws.com/AWSServiceRoleForOrganizations",
+                    "arn:aws:iam::714071859213:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS",
+                    "arn:aws:iam::714071859213:role/aws-service-role/support.amazonaws.com/AWSServiceRoleForSupport",
+                    "arn:aws:iam::714071859213:role/aws-service-role/trustedadvisor.amazonaws.com/AWSServiceRoleForTrustedAdvisor",
+                    "arn:aws:iam::714071859213:role/service-role/codebuild-marketplace-api-build-service-role",
+                    "arn:aws:iam::714071859213:user/mohi",
+                    "arn:aws:iam::714071859213:user/raffi",
+                    "arn:aws:iam::714071859213:user/rizqi",
+                    "arn:aws:iam::714071859213:user/widada",
+                    "arn:aws:iam::714071859213:role/9y3u08-f45qbps",
+                    "arn:aws:iam::714071859213:role/service-role/AWSCodePipelineServiceRole-ap-southeast-1-marketplace-api-pipel",
+                    "arn:aws:iam::714071859213:role/aws-service-role/ops.apigateway.amazonaws.com/AWSServiceRoleForAPIGateway",
+                    "arn:aws:iam::714071859213:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+                    "arn:aws:iam::714071859213:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
+                    "arn:aws:iam::714071859213:role/aws-service-role/logger.cloudfront.amazonaws.com/AWSServiceRoleForCloudFrontLogger",
+                    "arn:aws:iam::714071859213:user/ade",
+                    "arn:aws:iam::714071859213:user/avanaServerlessAccount",
+                    "arn:aws:iam::714071859213:user/avanatest",
+                    "arn:aws:iam::714071859213:user/daleen",
+                    "arn:aws:iam::714071859213:user/didik",
+                    "arn:aws:iam::714071859213:user/hendro",
+                    "arn:aws:iam::714071859213:user/ibonk",
+                    "arn:aws:iam::714071859213:user/kemal",
+                    "arn:aws:iam::714071859213:user/luqmanul",
+                    "arn:aws:iam::714071859213:user/maks"
+                ]
+            },
+            "Action": [
+                "kms:Create*",
+                "kms:Describe*",
+                "kms:Enable*",
+                "kms:List*",
+                "kms:Put*",
+                "kms:Update*",
+                "kms:Revoke*",
+                "kms:Disable*",
+                "kms:Get*",
+                "kms:Delete*",
+                "kms:TagResource",
+                "kms:UntagResource",
+                "kms:ScheduleKeyDeletion",
+                "kms:CancelKeyDeletion"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "Allow use of the key",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::714071859213:role/service-role/codebuild-mirza-service-role",
+                    "arn:aws:iam::714071859213:role/ecsAutoscaleRole",
+                    "arn:aws:iam::714071859213:role/ecsInstanceRole",
+                    "arn:aws:iam::714071859213:role/ecsTaskExecutionRole",
+                    "arn:aws:iam::714071859213:role/LambdaExtremeAccess",
+                    "arn:aws:iam::714071859213:role/OrganizationAccountAccessRole",
+                    "arn:aws:iam::714071859213:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+                    "arn:aws:iam::714071859213:role/aws-service-role/elasticache.amazonaws.com/AWSServiceRoleForElastiCache",
+                    "arn:aws:iam::714071859213:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing",
+                    "arn:aws:iam::714071859213:role/aws-service-role/globalaccelerator.amazonaws.com/AWSServiceRoleForGlobalAccelerator",
+                    "arn:aws:iam::714071859213:role/aws-service-role/replicator.lambda.amazonaws.com/AWSServiceRoleForLambdaReplicator",
+                    "arn:aws:iam::714071859213:role/aws-service-role/organizations.amazonaws.com/AWSServiceRoleForOrganizations",
+                    "arn:aws:iam::714071859213:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS",
+                    "arn:aws:iam::714071859213:role/aws-service-role/support.amazonaws.com/AWSServiceRoleForSupport",
+                    "arn:aws:iam::714071859213:role/aws-service-role/trustedadvisor.amazonaws.com/AWSServiceRoleForTrustedAdvisor",
+                    "arn:aws:iam::714071859213:role/service-role/codebuild-marketplace-api-build-service-role",
+                    "arn:aws:iam::714071859213:user/mohi",
+                    "arn:aws:iam::714071859213:user/raffi",
+                    "arn:aws:iam::714071859213:user/rizqi",
+                    "arn:aws:iam::714071859213:user/widada",
+                    "arn:aws:iam::714071859213:role/9y3u08-f45qbps",
+                    "arn:aws:iam::714071859213:role/service-role/AWSCodePipelineServiceRole-ap-southeast-1-marketplace-api-pipel",
+                    "arn:aws:iam::714071859213:role/aws-service-role/ops.apigateway.amazonaws.com/AWSServiceRoleForAPIGateway",
+                    "arn:aws:iam::714071859213:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+                    "arn:aws:iam::714071859213:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
+                    "arn:aws:iam::714071859213:role/aws-service-role/logger.cloudfront.amazonaws.com/AWSServiceRoleForCloudFrontLogger",
+                    "arn:aws:iam::714071859213:user/ade",
+                    "arn:aws:iam::714071859213:user/avanaServerlessAccount",
+                    "arn:aws:iam::714071859213:user/avanatest",
+                    "arn:aws:iam::714071859213:user/daleen",
+                    "arn:aws:iam::714071859213:user/didik",
+                    "arn:aws:iam::714071859213:user/hendro",
+                    "arn:aws:iam::714071859213:user/ibonk",
+                    "arn:aws:iam::714071859213:user/kemal",
+                    "arn:aws:iam::714071859213:user/luqmanul",
+                    "arn:aws:iam::714071859213:user/maks"
+                ]
+            },
+            "Action": [
+                "kms:Encrypt",
+                "kms:Decrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*",
+                "kms:DescribeKey"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "Allow attachment of persistent resources",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::714071859213:role/service-role/codebuild-mirza-service-role",
+                    "arn:aws:iam::714071859213:role/ecsAutoscaleRole",
+                    "arn:aws:iam::714071859213:role/ecsInstanceRole",
+                    "arn:aws:iam::714071859213:role/ecsTaskExecutionRole",
+                    "arn:aws:iam::714071859213:role/LambdaExtremeAccess",
+                    "arn:aws:iam::714071859213:role/OrganizationAccountAccessRole",
+                    "arn:aws:iam::714071859213:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+                    "arn:aws:iam::714071859213:role/aws-service-role/elasticache.amazonaws.com/AWSServiceRoleForElastiCache",
+                    "arn:aws:iam::714071859213:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing",
+                    "arn:aws:iam::714071859213:role/aws-service-role/globalaccelerator.amazonaws.com/AWSServiceRoleForGlobalAccelerator",
+                    "arn:aws:iam::714071859213:role/aws-service-role/replicator.lambda.amazonaws.com/AWSServiceRoleForLambdaReplicator",
+                    "arn:aws:iam::714071859213:role/aws-service-role/organizations.amazonaws.com/AWSServiceRoleForOrganizations",
+                    "arn:aws:iam::714071859213:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS",
+                    "arn:aws:iam::714071859213:role/aws-service-role/support.amazonaws.com/AWSServiceRoleForSupport",
+                    "arn:aws:iam::714071859213:role/aws-service-role/trustedadvisor.amazonaws.com/AWSServiceRoleForTrustedAdvisor",
+                    "arn:aws:iam::714071859213:role/service-role/codebuild-marketplace-api-build-service-role",
+                    "arn:aws:iam::714071859213:user/mohi",
+                    "arn:aws:iam::714071859213:user/raffi",
+                    "arn:aws:iam::714071859213:user/rizqi",
+                    "arn:aws:iam::714071859213:user/widada",
+                    "arn:aws:iam::714071859213:role/9y3u08-f45qbps",
+                    "arn:aws:iam::714071859213:role/service-role/AWSCodePipelineServiceRole-ap-southeast-1-marketplace-api-pipel",
+                    "arn:aws:iam::714071859213:role/aws-service-role/ops.apigateway.amazonaws.com/AWSServiceRoleForAPIGateway",
+                    "arn:aws:iam::714071859213:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+                    "arn:aws:iam::714071859213:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
+                    "arn:aws:iam::714071859213:role/aws-service-role/logger.cloudfront.amazonaws.com/AWSServiceRoleForCloudFrontLogger",
+                    "arn:aws:iam::714071859213:user/ade",
+                    "arn:aws:iam::714071859213:user/avanaServerlessAccount",
+                    "arn:aws:iam::714071859213:user/avanatest",
+                    "arn:aws:iam::714071859213:user/daleen",
+                    "arn:aws:iam::714071859213:user/didik",
+                    "arn:aws:iam::714071859213:user/hendro",
+                    "arn:aws:iam::714071859213:user/ibonk",
+                    "arn:aws:iam::714071859213:user/kemal",
+                    "arn:aws:iam::714071859213:user/luqmanul",
+                    "arn:aws:iam::714071859213:user/maks"
+                ]
+            },
+            "Action": [
+                "kms:CreateGrant",
+                "kms:ListGrants",
+                "kms:RevokeGrant"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "Bool": {
+                    "kms:GrantIsForAWSResource": "true"
+                }
+            }
+        }
+    ]
 }

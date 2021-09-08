@@ -24,12 +24,6 @@ variable "feature" {
   description = "the name of AWS services feature"
 }
 
-variable "creator" {
-  type        = string
-  default     = "tf"
-  description = "The creator name of the resource"
-}
-
 #Network Load Balancer Arguments
 variable "enable_cross_zone_load_balancing" {
   type        = bool

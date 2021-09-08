@@ -1,8 +1,8 @@
 module "s3_bucket" {
   source  = "../../../modules/storage"
-  region  = "us-east-1"
+  region  = "ap-southeast-2"
   unit    = "avn"
   env     = "dev"
   code    = "storage"
-  feature = "s3-tfstate"
+  feature = "s3-terraform"
 }

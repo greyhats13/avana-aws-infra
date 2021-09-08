@@ -1,10 +1,10 @@
 
 resource "aws_security_group" "nlb_sg" {
-  name        = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}-nlb-sg"
+  name        = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}-nlb-sg-${var.creator}"
   description = "Security Group for Network Load Balancer"
   vpc_id      = data.terraform_remote_state.avn_network.outputs.network_vpc_id
   tags = {
-    Name      = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}-nlb-sg"
+    Name      = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}-nlb-sg-${var.creator}"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = "${var.feature[0]}-nlb-sg"
@@ -47,7 +47,7 @@ resource "aws_eip" "nlb_eip" {
   vpc   = true
 
   tags = {
-    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}-nlb-eip-${count.index}"
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}-nlb-eip-${var.creator}-${count.index}"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = "${var.feature[0]}-nlb-eip"
@@ -56,7 +56,7 @@ resource "aws_eip" "nlb_eip" {
 }
 
 resource "aws_lb" "nlb" {
-  name                             = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}-nlb"
+  name                             = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}-nlb-${var.creator}"
   load_balancer_type               = "network"
   enable_cross_zone_load_balancing = var.enable_cross_zone_load_balancing
 

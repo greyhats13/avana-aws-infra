@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket  = "avn-dev-storage-s3-tfstate"
-    region  = "us-east-1"
+    bucket  = "avn-dev-storage-s3-terraform"
+    region  = "ap-southeast-2"
     key     = "avn-network-dev.tfstate"
     profile = "avn-dev"
   }
@@ -9,7 +9,7 @@ terraform {
 
 module "vpc" {
   source               = "../../modules/network"
-  region               = "us-east-1"
+  region               = "ap-southeast-2"
   unit                 = "avn"
   env                  = "dev"
   code                 = "network"
