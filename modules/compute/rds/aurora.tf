@@ -28,8 +28,8 @@ resource "random_password" "aurora_password" {
   min_numeric      = 2
 }
 
-resource "aws_rds_cluster" "aurora" {
-  cluster_identifier                  = "${var.unit}-${var.env}-${var.code}-${var.feature}-cluster"
+resource "aws_rds_cluster" "aurora_cluster" {
+  cluster_identifier                  = "${var.unit}-${var.env}-${var.code}-${var.feature}-cluster-${var.region}"
   engine_mode                         = var.engine_mode
   engine                              = var.engine
   engine_version                      = var.engine_version
@@ -52,6 +52,7 @@ resource "aws_rds_cluster" "aurora" {
   deletion_protection                 = var.deletion_protection
   apply_immediately                   = var.apply_immediately
   skip_final_snapshot                 = var.skip_final_snapshot
+  final_snapshot_identifier           = "${var.unit}-${var.env}-${var.code}-${var.feature}-final-snapshot"
   tags = {
     "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature}-cluster"
     "Env"     = var.env
@@ -65,3 +66,53 @@ resource "aws_rds_cluster" "aurora" {
     ]
   }
 }
+
+resource "aws_iam_role" "monitoring_role" {
+  name = "${var.unit}-${var.env}-${var.code}-${var.feature}-monitoring-role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "monitoring.rds.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "monitoring_attach_policy" {
+  role       = aws_iam_role.monitoring_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
+}
+
+resource "aws_rds_cluster_instance" "aurora_instances" {
+  count                           = var.number_of_instance
+  identifier                      = "${var.unit}-${var.env}-${var.code}-${var.feature}-instance-${element(data.aws_availability_zones.az.names, count.index)}-${count.index}"
+  cluster_identifier              = aws_rds_cluster.aurora_cluster.id
+  instance_class                  = var.instance_class
+  engine                          = aws_rds_cluster.aurora_cluster.engine
+  engine_version                  = aws_rds_cluster.aurora_cluster.engine_version
+  db_parameter_group_name         = aws_db_parameter_group.db_parameter_group.id
+  publicly_accessible             = var.publicly_accessible
+  copy_tags_to_snapshot           = aws_rds_cluster.aurora_cluster.copy_tags_to_snapshot
+  promotion_tier                  = count.index
+  availability_zone               = element(data.aws_availability_zones.az.names, count.index)
+  performance_insights_enabled    = var.performance_insights_enabled
+  performance_insights_kms_key_id = var.performance_insights_enabled ? data.terraform_remote_state.kms.outputs.kms_key_arn : null
+  monitoring_interval             = var.monitoring_interval
+  monitoring_role_arn             = aws_iam_role.monitoring_role.arn
+  auto_minor_version_upgrade      = var.auto_minor_version_upgrade
+  apply_immediately               = var.apply_immediately
+  ca_cert_identifier              = var.ca_cert_identifier
+  tags = {
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature}-instance-${element(data.aws_availability_zones.az.names, count.index)}-${count.index}"
+    "Env"     = var.env
+    "Code"    = var.code
+    "Feature" = var.feature
+  }
+}
+

@@ -109,3 +109,38 @@ variable "skip_final_snapshot" {
   type        = bool
   description = "Aurora Skip Final Snapshot"
 }
+
+variable "number_of_instance" {
+  type        = number
+  description = "Aurora number of instance"
+}
+
+variable "instance_class" {
+  type        = string
+  description = "Aurora instance class"
+}
+
+variable "publicly_accessible" {
+  type        = bool
+  description = "Aurora publicly accessible"
+}
+
+variable "performance_insights_enabled" {
+  type        = bool
+  description = "Aurora performance insights enabled"
+}
+
+variable "monitoring_interval" {
+  type        = number
+  description = "Aurora Monitoring interval"
+}
+
+variable "auto_minor_version_upgrade" {
+  type        = bool
+  description = "Aurora auto minor version upgrade"
+}
+
+variable "ca_cert_identifier" {
+  type        = string
+  description = "Aurora CA Certificate Identifier"
+}

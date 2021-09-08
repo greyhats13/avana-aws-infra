@@ -31,4 +31,11 @@ module "rds" {
   deletion_protection                 = false
   apply_immediately                   = true
   skip_final_snapshot                 = true
+  number_of_instance                  = 2 #for 1 write and 1 read
+  instance_class                      = "db.r6g.large"
+  publicly_accessible                 = false
+  performance_insights_enabled        = true
+  monitoring_interval                 = 60
+  auto_minor_version_upgrade          = true
+  ca_cert_identifier                  = "rds-ca-2019"
 }
