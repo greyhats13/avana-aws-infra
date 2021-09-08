@@ -13,7 +13,7 @@ module "rds" {
   unit                                = "avn"
   env                                 = "dev"
   code                                = "compute"
-  feature                             = "rds-aurora"
+  feature                             = "aurora"
   parameter_group_family              = "aurora-mysql5.7"
   engine_mode                         = "provisioned"
   engine                              = "aurora-mysql"
