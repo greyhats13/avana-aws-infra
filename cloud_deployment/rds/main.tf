@@ -38,4 +38,13 @@ module "rds" {
   monitoring_interval                 = 60
   auto_minor_version_upgrade          = true
   ca_cert_identifier                  = "rds-ca-2019"
+  scalable_dimension                  = "rds:cluster:ReadReplicaCount"
+  service_namespace                   = "rds"
+  min_capacity                        = 1
+  max_capacity                        = 15
+  policy_type                         = "TargetTrackingScaling"
+  predefined_metric_type              = "RDSReaderAverageDatabaseConnections"
+  target_value                        = 750  #750 connection for 16gb memory
+  scale_in_cooldown                   = 1800 #30 minutes to cooldown after spikes
+  scale_out_cooldown                  = 60   #If spikes autoscaling as soos as possible
 }

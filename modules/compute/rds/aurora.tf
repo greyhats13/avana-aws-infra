@@ -116,3 +116,63 @@ resource "aws_rds_cluster_instance" "aurora_instances" {
   }
 }
 
+resource "aws_appautoscaling_target" "autoscaling_target" {
+  service_namespace  = var.service_namespace
+  scalable_dimension = var.scalable_dimension
+  resource_id        = "cluster:${aws_rds_cluster.aurora_cluster.id}"
+  min_capacity       = var.min_capacity
+  max_capacity       = var.max_capacity
+}
+
+resource "aws_appautoscaling_policy" "autoscaling_policy" {
+  name               = "${var.unit}-${var.env}-${var.code}-${var.feature}-autoscaling-policy"
+  service_namespace  = aws_appautoscaling_target.autoscaling_target.service_namespace
+  scalable_dimension = aws_appautoscaling_target.autoscaling_target.scalable_dimension
+  resource_id        = aws_appautoscaling_target.autoscaling_target.resource_id
+  policy_type        = var.policy_type
+
+  target_tracking_scaling_policy_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = var.predefined_metric_type
+    }
+
+    target_value       = var.target_value
+    scale_in_cooldown  = var.scale_in_cooldown
+    scale_out_cooldown = var.scale_out_cooldown
+  }
+}
+
+resource "aws_ssm_parameter" "aurora_cluster_endpoint" {
+  name   = "/${var.unit}/${var.env}/secret/${var.code}/${var.feature}/DB_WRITE_HOST"
+  type   = "SecureString"
+  value  = aws_rds_cluster.aurora_cluster.endpoint
+  key_id = data.terraform_remote_state.kms.outputs.kms_alias_arn
+}
+
+resource "aws_ssm_parameter" "aurora_reader_endpoint" {
+  name   = "/${var.unit}/${var.env}/secret/${var.code}/${var.feature}/DB_READ_HOST"
+  type   = "SecureString"
+  value  = aws_rds_cluster.aurora_cluster.reader_endpoint
+  key_id = data.terraform_remote_state.kms.outputs.kms_alias_arn
+}
+
+resource "aws_ssm_parameter" "aurora_master_username" {
+  name   = "/${var.unit}/${var.env}/secret/${var.code}/${var.feature}/DB_MASTER_USERNAME"
+  type   = "SecureString"
+  value  = aws_rds_cluster.aurora_cluster.master_username
+  key_id = data.terraform_remote_state.kms.outputs.kms_alias_arn
+}
+
+resource "aws_ssm_parameter" "aurora_master_password" {
+  name   = "/${var.unit}/${var.env}/secret/${var.code}/${var.feature}/DB_MASTER_PASSWORD"
+  type   = "SecureString"
+  value  = random_password.aurora_password.result
+  key_id = data.terraform_remote_state.kms.outputs.kms_alias_arn
+}
+
+resource "aws_ssm_parameter" "aurora_port" {
+  name   = "/${var.unit}/${var.env}/secret/${var.code}/${var.feature}/DB_PORT"
+  type   = "SecureString"
+  value  = aws_rds_cluster.aurora_cluster.port
+  key_id = data.terraform_remote_state.kms.outputs.kms_alias_arn
+}

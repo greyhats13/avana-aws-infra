@@ -144,3 +144,50 @@ variable "ca_cert_identifier" {
   type        = string
   description = "Aurora CA Certificate Identifier"
 }
+
+variable "service_namespace" {
+  type        = string
+  description = "Aurora autoscaling service namespace"
+}
+
+variable "scalable_dimension" {
+  type        = string
+  description = "Aurora Autoscaling target scalable dimension"
+}
+
+variable "min_capacity" {
+  type        = number
+  description = "Aurora Autoscaling target minimum capacity"
+}
+
+variable "max_capacity" {
+  type        = number
+  description = "Aurora Autoscaling target maximum capacity"
+}
+
+variable "policy_type" {
+  type        = string
+  description = "Aurora Autoscaling policy type"
+}
+
+variable "predefined_metric_type" {
+  type        = string
+  description = "Aurora Autoscaling predefined metric type"
+}
+
+variable "target_value" {
+  type        = number
+  description = "Aurora Autoscaling Target Value"
+}
+
+variable "scale_in_cooldown" {
+  type        = number
+  description = "Aurora Autoscaling policy scale in cooldown"
+}
+
+##Scale outcooldown
+variable "scale_out_cooldown" {
+  type        = number
+  description = "Aurora Autoscaling policy scale out cooldown"
+}
+
