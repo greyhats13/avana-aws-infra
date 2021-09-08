@@ -8,9 +8,16 @@ data "terraform_remote_state" "network" {
   }
 }
 
-resource "aws_elasticache_subnet_group" "subnet_group" {
-  name       = "${var.unit}-${var.env}-${var.code}-${var.feature}-subnet-group"
-  subnet_ids = data.terraform_remote_state.network.outputs.network_cache_subnet_id
+resource "aws_db_subnet_group" "db_subnet_group" {
+  name        = "${var.unit}-${var.env}-${var.code}-${var.feature}-db-subnet-group"
+  subnet_ids  = data.terraform_remote_state.network.outputs.network_db_subnet_id
+  description = "DB subnet group for ${var.unit}-${var.env}-${var.code}-${var.feature}"
+  tags = {
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature}-db-subnet-group"
+    "Env"     = var.env
+    "Code"    = var.code
+    "Feature" = var.feature
+  }
 }
 
 resource "aws_security_group" "sg" {

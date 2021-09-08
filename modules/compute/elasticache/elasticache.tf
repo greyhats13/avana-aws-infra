@@ -77,4 +77,3 @@ resource "aws_ssm_parameter" "elasticache_password" {
   value  = random_password.elasticache_password.result
   key_id = data.terraform_remote_state.kms.outputs.kms_alias_arn
 }
-
