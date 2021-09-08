@@ -8,7 +8,7 @@ resource "aws_route_table" "public_rt" {
   }
 
   tags = {
-    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[5]}-public-${var.creator}"
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[5]}-public"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = var.feature[5]
@@ -33,7 +33,7 @@ resource "aws_route_table" "app_rt" {
   }
 
   tags = {
-    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[5]}-app-${var.creator}"
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[5]}-app"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = var.feature[5]
@@ -58,7 +58,7 @@ resource "aws_route_table" "cache_rt" {
   }
 
   tags = {
-    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[5]}-cache-${var.creator}"
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[5]}-cache"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = var.feature[5]
@@ -83,7 +83,7 @@ resource "aws_route_table" "db_rt" {
   }
 
   tags = {
-    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[5]}-db-${var.creator}"
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[5]}-db"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = var.feature[5]

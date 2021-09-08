@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket  = "avn-dev-storage-s3-tfstate-tf"
-    region  = "ap-southeast-1"
+    bucket  = "avn-dev-storage-s3-tfstate"
+    region  = "us-east-1"
     key     = "avn-security-kms-dev.tfstate"
     profile = "avn-dev"
   }
@@ -13,12 +13,12 @@ data "local_file" "kms_policy" {
 
 module "kms" {
   source                   = "../../modules/security/kms"
-  region                   = "ap-southeast-1"
+  region                   = "us-east-1"
   unit                     = "avn"
   env                      = "dev"
   code                     = "security"
   feature                  = ["kms"]
-  description              = "Avana General Customer Managed Key on dev account"
+  description              = "General Customer Managed Key on dev account"
   key_usage                = "ENCRYPT_DECRYPT"
   enable_key_rotation      = true
   deletion_window_in_days  = 7

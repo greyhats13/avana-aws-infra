@@ -1,10 +1,10 @@
 
 data "aws_ssm_parameter" "github_token" {
-  name = "/${var.unit}/${var.env}/secret/ssm/github/token"
+  name = "/${var.unit}/${var.env}/secret/security/ssm/GITHUB_TOKEN"
 }
 
 data "aws_ssm_parameter" "github_owner" {
-  name = "/${var.unit}/${var.env}/secret/ssm/github/owner"
+  name = "/${var.unit}/${var.env}/secret/security/ssm/GITHUB_OWNER"
 }
 
 provider "github" {
@@ -35,7 +35,7 @@ resource "github_branch" "dev" {
 
 # resource "github_team_repository" "repo_team" {
 #   team_id    = data.github_team.team.id
-#   repository = github_repository.repo.name
+#   repository = github_repository.repo[0].name
 #   permission = "maintain"
 # }
 

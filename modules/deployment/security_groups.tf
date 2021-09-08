@@ -20,6 +20,16 @@ resource "aws_security_group_rule" "sg_in_tcp" {
   description       = "Allow ingress http for ${var.unit}-${var.env}-${var.code}-${var.feature} service"
 }
 
+resource "aws_security_group_rule" "sg_in_tcp8080" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.sg.id
+  description       = "Allow ingress http for ${var.unit}-${var.env}-${var.code}-${var.feature} service"
+}
+
 # resource "aws_security_group_rule" "sg_in_https" {
 #   type              = "ingress"
 #   from_port         = 443

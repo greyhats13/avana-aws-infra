@@ -1,5 +1,5 @@
 provider "aws" {
-  region  = "ap-southeast-1"
+  region  = "us-east-1"
   profile = "avn-dev"
 }
 
@@ -12,7 +12,7 @@ resource "aws_kms_key" "kms" {
   customer_master_key_spec = var.customer_master_key_spec
   policy                   = var.policy
   tags = {
-    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}-${var.creator}"
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = var.feature[0]
@@ -21,6 +21,6 @@ resource "aws_kms_key" "kms" {
 }
 
 resource "aws_kms_alias" "kms_alias" {
-  name          = "alias/${var.unit}-${var.env}-${var.code}-${var.feature[0]}-${var.creator}"
+  name          = "alias/${var.unit}-${var.env}-${var.code}-${var.feature[0]}"
   target_key_id = aws_kms_key.kms.key_id
 }

@@ -17,7 +17,7 @@ resource "aws_iam_role" "codepipeline_role" {
 
 resource "aws_iam_role_policy_attachment" "codepipeline_attach_policy" {
   role       = aws_iam_role.codepipeline_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AWSCodePipelineFullAccess"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess" #not best practise, for testing purpose
 }
 
 resource "aws_codepipeline" "codepipeline" {

@@ -6,7 +6,7 @@ provider "aws" {
 data "terraform_remote_state" "kms" {
   backend = "s3"
   config = {
-    bucket  = "${var.unit}-${var.env}-storage-s3-tfstate-tf"
+    bucket  = "${var.unit}-${var.env}-storage-s3-tfstate"
     key     = "${var.unit}-security-kms-${var.env}.tfstate"
     region  = var.region
     profile = "${var.unit}-${var.env}"

@@ -17,7 +17,7 @@ resource "aws_iam_role" "codebuild_role" {
 
 resource "aws_iam_role_policy_attachment" "codebuild_attach_policy" {
   role       = aws_iam_role.codebuild_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AWSCodeBuildAdminAccess"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess" #not best practise, for testing purpose
 }
 
 resource "aws_codebuild_project" "build_project" {
@@ -39,6 +39,37 @@ resource "aws_codebuild_project" "build_project" {
       name  = "STAGE"
       value = "BUILD"
     }
+
+    environment_variable {
+      name  = "AWS_DEFAULT_REGION"
+      value = var.region
+    }
+
+    environment_variable {
+      name = "SERVICE_NAME"
+      value = "${var.unit}-${var.env}-${var.code}-${var.feature}"
+    }
+
+    environment_variable {
+      name  = "REPOSITORY_URI_PHP_FPM"
+      value = aws_ecr_repository.ecr_php.repository_url
+    }
+
+    environment_variable {
+      name  = "REPOSITORY_URI_NGINX"
+      value = aws_ecr_repository.ecr_nginx.repository_url
+    }
+
+    environment_variable {
+      name = "IMAGE_NAME_PHP_FPM"
+      value = aws_ecr_repository.ecr_php.name
+    }
+
+    environment_variable {
+      name = "IMAGE_NAME_NGINX"
+      value = aws_ecr_repository.ecr_nginx.name
+    }
+
   }
 
   cache {

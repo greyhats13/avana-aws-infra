@@ -23,7 +23,3 @@ variable "feature" {
   description = "the name of AWS services feature"
 }
 
-variable "creator" {
-  type        = string
-  description = "The creator name of the resource"
-}

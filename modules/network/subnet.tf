@@ -7,7 +7,7 @@ resource "aws_subnet" "public_subnet" {
   cidr_block = element(var.public_subnet_cidr, count.index)
   availability_zone = element(data.aws_availability_zones.az.names, count.index)
   tags = {
-    "Name" = "${var.unit}-${var.env}-${var.code}-${var.feature[1]}-public-${element(data.aws_availability_zones.az.names, count.index)}-${var.creator}"
+    "Name" = "${var.unit}-${var.env}-${var.code}-${var.feature[1]}-public-${element(data.aws_availability_zones.az.names, count.index)}"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = "${var.feature[1]}-public"
@@ -22,7 +22,7 @@ resource "aws_subnet" "app_subnet" {
   cidr_block = element(var.app_subnet_cidr, count.index)
   availability_zone = element(data.aws_availability_zones.az.names, count.index)
   tags = {
-    "Name" = "${var.unit}-${var.env}-${var.code}-${var.feature[1]}-app-${element(data.aws_availability_zones.az.names, count.index)}-${var.creator}"
+    "Name" = "${var.unit}-${var.env}-${var.code}-${var.feature[1]}-app-${element(data.aws_availability_zones.az.names, count.index)}"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = "${var.feature[1]}-app"
@@ -37,7 +37,7 @@ resource "aws_subnet" "cache_subnet" {
   cidr_block = element(var.cache_subnet_cidr, count.index)
   availability_zone = element(data.aws_availability_zones.az.names, count.index)
   tags = {
-    "Name" = "${var.unit}-${var.env}-${var.code}-${var.feature[1]}-cache-${element(data.aws_availability_zones.az.names, count.index)}-${var.creator}"
+    "Name" = "${var.unit}-${var.env}-${var.code}-${var.feature[1]}-cache-${element(data.aws_availability_zones.az.names, count.index)}"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = "${var.feature[1]}-cache"
@@ -52,7 +52,7 @@ resource "aws_subnet" "db_subnet" {
   cidr_block = element(var.db_subnet_cidr, count.index)
   availability_zone = element(data.aws_availability_zones.az.names, count.index)
   tags = {
-    "Name" = "${var.unit}-${var.env}-${var.code}-${var.feature[1]}-db-${element(data.aws_availability_zones.az.names, count.index)}-${var.creator}"
+    "Name" = "${var.unit}-${var.env}-${var.code}-${var.feature[1]}-db-${element(data.aws_availability_zones.az.names, count.index)}"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = "${var.feature[1]}-db"

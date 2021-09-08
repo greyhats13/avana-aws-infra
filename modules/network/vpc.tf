@@ -8,7 +8,7 @@ resource "aws_vpc" "vpc" {
   enable_dns_support = var.enable_dns_support
   enable_dns_hostnames = var.enable_dns_hostnames
   tags = {
-    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}-${var.creator}"
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[0]}"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = var.feature[0]

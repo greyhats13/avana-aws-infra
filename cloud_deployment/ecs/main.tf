@@ -1,15 +1,15 @@
 terraform {
   backend "s3" {
-    bucket  = "avn-dev-storage-s3-tfstate-tf"
-    region  = "ap-southeast-1"
+    bucket  = "avn-dev-storage-s3-tfstate"
+    region  = "us-east-1"
     key     = "avn-compute-ecs-dev.tfstate"
     profile = "avn-dev"
   }
 }
 
 module "ecs" {
-  source                           = "../../../modules/compute/ecs"
-  region                           = "ap-southeast-1"
+  source                           = "../../modules/compute/ecs"
+  region                           = "us-east-1"
   unit                             = "avn"
   env                              = "dev"
   code                             = "compute"

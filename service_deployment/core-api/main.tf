@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket  = "avn-dev-storage-s3-tfstate-tf"
-    region  = "ap-southeast-1"
+    bucket  = "avn-dev-storage-s3-tfstate"
+    region  = "us-east-1"
     key     = "avn-core-api-dev.tfstate"
     profile = "avn-dev"
   }
@@ -13,7 +13,7 @@ data "template_file" "iam_role_task_policy" {
 
 module "deployment" {
   source                   = "../../modules/deployment"
-  region                   = "ap-southeast-1"
+  region                   = "us-east-1"
   unit                     = "avn"
   env                      = "dev"
   code                     = "core"

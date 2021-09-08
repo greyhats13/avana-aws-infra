@@ -3,7 +3,7 @@ resource "aws_eip" "eip" {
   vpc   = true
 
   tags = {
-    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[3]}-${var.creator}-${count.index}"
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[3]}-${count.index}"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = var.feature[3]
@@ -17,7 +17,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = element(aws_subnet.public_subnet.*.id, count.index)
 
   tags = {
-    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[4]}-${element(data.aws_availability_zones.az.names, count.index)}-${var.creator}"
+    "Name"    = "${var.unit}-${var.env}-${var.code}-${var.feature[4]}-${element(data.aws_availability_zones.az.names, count.index)}"
     "Env"     = var.env
     "Code"    = var.code
     "Feature" = var.feature[4]
