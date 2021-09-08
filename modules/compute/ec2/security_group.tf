@@ -41,6 +41,28 @@ resource "aws_security_group_rule" "sg_in_https" {
   description       = "Allow ingress HTTPS 443 for ${var.unit}-${var.env}-${var.code}-${var.feature}"
 }
 
+#atlantis server
+resource "aws_security_group_rule" "sg_in_atlantis" {
+  type              = "ingress"
+  from_port         = 4141
+  to_port           = 4141
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.sg.id
+  description       = "Allow ingress TCP 4141 for ${var.unit}-${var.env}-${var.code}-${var.feature}"
+}
+
+#phpmyadmin
+resource "aws_security_group_rule" "sg_in_phpmyadmin" {
+  type              = "ingress"
+  from_port         = 8081
+  to_port           = 8081
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.sg.id
+  description       = "Allow ingress TCP 8081 for ${var.unit}-${var.env}-${var.code}-${var.feature}"
+}
+
 resource "aws_security_group_rule" "sg_eg_all" {
   type              = "egress"
   from_port         = 0
