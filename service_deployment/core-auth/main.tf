@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket  = "avn-dev-storage-s3-terraform"
     region  = "ap-southeast-2"
-    key     = "avn-core-api-dev.tfstate"
+    key     = "avn-core-auth-dev.tfstate"
     profile = "avn-dev"
   }
 }
@@ -17,7 +17,7 @@ module "deployment" {
   unit                     = "avn"
   env                      = "dev"
   code                     = "core"
-  feature                  = "api"
+  feature                  = "auth"
   requires_compatibilities = ["FARGATE"]
   cpu                      = 128
   memory                   = 512
