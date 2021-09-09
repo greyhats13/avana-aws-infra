@@ -1,6 +1,11 @@
 version: 3
 projects:
-  - dir: service_deployment/core-api
+  - dir: service_deployment/core-test
+    apply_requirements: []
+    autoplan:
+      when_modified: ["*.tf*"]
+      enabled: true
+  - dir: service_deployment/core-payment
     apply_requirements: []
     autoplan:
       when_modified: ["*.tf*"]
@@ -10,10 +15,6 @@ projects:
     autoplan:
       when_modified: ["*.tf*"]
       enabled: true
-  - dir: cloud_deployment/ecs
-    apply_requirements: []
-    autoplan:
-      when_modified: ["*.tf*"]
   - dir: cloud_deployment/ecs
     apply_requirements: []
     autoplan:
