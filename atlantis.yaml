@@ -5,7 +5,7 @@ projects:
     autoplan:
       when_modified: ["*.tf*"]
       enabled: true
-  - dir: service_deployment/core-oauth
+  - dir: service_deployment/core-user
     apply_requirements: []
     autoplan:
       when_modified: ["*.tf*"]
