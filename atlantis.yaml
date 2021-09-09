@@ -5,11 +5,6 @@ projects:
     autoplan:
       when_modified: ["*.tf*"]
       enabled: true
-  - dir: service_deployment/core-oauth
-    apply_requirements: []
-    autoplan:
-      when_modified: ["*.tf*"]
-      enabled: true
   - dir: cloud_deployment/bastion
     apply_requirements: []
     autoplan:
