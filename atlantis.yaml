@@ -19,10 +19,6 @@ projects:
     apply_requirements: []
     autoplan:
       when_modified: ["*.tf*"]
-  - dir: cloud_deployment/ecs
-    apply_requirements: []
-    autoplan:
-      when_modified: ["*.tf*"]
   - dir: cloud_deployment/elasticache
     apply_requirements: []
     autoplan:
