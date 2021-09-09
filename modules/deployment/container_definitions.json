@@ -15,22 +15,5 @@
         "protocol"  : "tcp"
       }
     ]
-  },
-  {
-    "name" : "${unit}-${env}-${code}-${feature}-nginx",
-    "image" : "${image}:latest",
-    "cpu" : ${cpu},
-    "memory" : ${memory},
-    "memoryReservation" : ${memory_reservation},
-    "essential" : true,
-    "mountPoints"  : [],
-    "volumesFrom"  : [],
-    "portMappings" : [
-      {
-        "containerPort" : 8080,
-        "hostPort" : 8080,
-        "protocol"  : "tcp"
-      }
-    ]
   }
 ]

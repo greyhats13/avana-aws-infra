@@ -1,12 +1,3 @@
-
-data "aws_ssm_parameter" "github_token" {
-  name = "/${var.unit}/${var.env}/secret/security/ssm/GITHUB_TOKEN"
-}
-
-data "aws_ssm_parameter" "github_owner" {
-  name = "/${var.unit}/${var.env}/secret/security/ssm/GITHUB_OWNER"
-}
-
 provider "github" {
   token        = data.aws_ssm_parameter.github_token.value
   owner        = data.aws_ssm_parameter.github_owner.value

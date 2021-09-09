@@ -26,7 +26,7 @@ module "deployment" {
   protocol                 = "TCP"
   target_type              = "ip"
   deregistration_delay     = "30"
-  health_check_interval    = "60"
+  health_check_interval    = "30"
   healthy_threshold        = 5
   unhealthy_threshold      = 5
   network_mode             = "awsvpc"

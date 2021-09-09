@@ -40,6 +40,26 @@ data "terraform_remote_state" "s3" {
   }
 }
 
+data "terraform_remote_state" "rds" {
+  backend = "s3"
+  config = {
+    bucket  = "${var.unit}-${var.env}-storage-s3-terraform"
+    key     = "${var.unit}-compute-rds-aurora-${var.env}.tfstate"
+    region  = var.region
+    profile = "${var.unit}-${var.env}"
+  }
+}
+
+data "terraform_remote_state" "elasticache" {
+  backend = "s3"
+  config = {
+    bucket  = "${var.unit}-${var.env}-storage-s3-terraform"
+    key     = "${var.unit}-compute-elasticache-${var.env}.tfstate"
+    region  = var.region
+    profile = "${var.unit}-${var.env}"
+  }
+}
+
 data "template_file" "container_definitions" {
   template = file("${path.module}/container_definitions.json")
   vars = {
@@ -57,4 +77,21 @@ data "template_file" "container_definitions" {
 
 data "template_file" "ecr_lifecycle_policy" {
   template = file("${path.module}/ecr_lifecycle_policy.json")
+}
+
+
+data "aws_ssm_parameter" "github_token" {
+  name = "/${var.unit}/${var.env}/secret/security/ssm/GITHUB_TOKEN"
+}
+
+data "aws_ssm_parameter" "github_owner" {
+  name = "/${var.unit}/${var.env}/secret/security/ssm/GITHUB_OWNER"
+}
+
+data "aws_ssm_parameter" "db_password" {
+  name = "/${var.unit}/${var.env}/secret/compute/aurora/DB_MASTER_PASSWORD"
+}
+
+data "aws_ssm_parameter" "redis_password" {
+  name = "/${var.unit}/${var.env}/secret/compute/elasticache/REDIS_PASSWORD"
 }
