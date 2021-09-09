@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "secret" {
-  name       = "${var.unit}-${var.env}-${var.code}-${var.feature}"
+  name       = "${var.unit}-${var.env}-${var.code}-${var.feature}-secret"
   kms_key_id = data.terraform_remote_state.kms.outputs.kms_alias_arn
 }
 

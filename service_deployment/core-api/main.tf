@@ -40,3 +40,4 @@ module "deployment" {
   scale_in_cooldown        = 15
   scale_out_cooldown       = 5
 }
+

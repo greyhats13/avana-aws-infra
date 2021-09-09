@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket  = "avn-dev-storage-s3-terraform"
     region  = "ap-southeast-2"
-    key     = "avn-core-api-dev.tfstate"
+    key     = "avn-core-user-dev.tfstate"
     profile = "avn-dev"
   }
 }
