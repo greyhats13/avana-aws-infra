@@ -22,7 +22,7 @@ module "deployment" {
   cpu                      = 128
   memory                   = 512
   memory_reservation       = 128
-  container_port           = 80
+  container_port           = 8000
   protocol                 = "TCP"
   target_type              = "ip"
   deregistration_delay     = "30"
